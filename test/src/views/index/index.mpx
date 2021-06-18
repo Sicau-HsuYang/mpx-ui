@@ -1,0 +1,40 @@
+<template>
+  <view>
+    <Index img="{{img}}" buttonText="{{buttonText}}"></Index>
+    <!-- <CountDown time="{{2000}}" /> -->
+    <CountDown time="{{200000}}" tick='{{1000}}' />
+  </view>
+</template>
+
+<script>
+import { createPage } from '@mpxjs/core'
+createPage({
+  data: {
+    mpxMode: __mpx_mode__,
+    img: '',
+    buttonText: ''
+  },
+  async onLoad(option) {
+    // const res = await getPageDataFromSomeWhere()
+    const res = {
+      img: '//dpubstatic.udache.com/static/dpubimg/-giHPx5M_i/01.jpg',
+      buttonText: '接口请求回来的按钮文案'
+    }
+    this.img = res.img
+    this.buttonText = res.buttonText
+  },
+  watch: {},
+  computed: {},
+  methods: {}
+})
+</script>
+<script type="application/json">
+{
+  "navigationBarTitleText": "index",
+  "backgroundColor": "#ffffff",
+  "usingComponents": {
+    "Index": "../../components/Index",
+    "CountDown": "../../../../packages/count-down/index.mpx"
+  }
+}
+</script>

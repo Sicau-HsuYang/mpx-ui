@@ -1,0 +1,38 @@
+<template>
+  <Index
+    img={{img}}
+    buttonText={{buttonText}}
+  ></Index>
+</template>
+
+<script>
+import { createComponent } from '@mpxjs/core'
+import { props as properties } from '../model/props'
+
+createComponent({
+  name: 'test',
+  properties,
+  data () {
+    return {}
+  },
+  computed: {
+  },
+  methods: {
+    handleClose () {
+      this.triggerEvent('trackEvent', { type: 'xxx' })
+    }
+  }
+})
+</script>
+
+<style lang="scss" scoped>
+</style>
+
+<script type="application/json" lang="json">
+{
+  "component": true,
+  "usingComponents": {
+    "Index": "../components/Index"
+  }
+}
+</script>

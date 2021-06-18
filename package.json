@@ -1,0 +1,27 @@
+{
+  "name": "mpx-ui",
+  "version": "1.0.0",
+  "description": "this is a library for mpx",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sicau-HsuYang/mpx-ui.git"
+  },
+  "keywords": [
+    "mpx",
+    "ui-component"
+  ],
+  "author": "JohnYang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Sicau-HsuYang/mpx-ui/issues"
+  },
+  "homepage": "https://github.com/Sicau-HsuYang/mpx-ui#readme",
+  "dependencies": {
+    "@mpxjs/core": "^2.6.69",
+    "vue": "^2.6.14"
+  }
+}

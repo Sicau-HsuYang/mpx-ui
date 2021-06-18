@@ -1,0 +1,21 @@
+<script>
+  import mpx, { createApp } from '@mpxjs/core'
+  import apiProxy from '@mpxjs/api-proxy'
+  import fetch from '@didi/mpx-fetch'
+  mpx.use(apiProxy, { usePromise: true }).use(fetch)
+  createApp({})
+</script>
+
+<style>
+
+</style>
+
+<script name="json">
+module.exports = {
+  pages: [
+    
+    './views/index/index'
+
+  ]
+}
+</script>

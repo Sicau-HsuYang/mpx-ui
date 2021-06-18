@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>index</title>
+</head>
+<body>
+  <script>
+    var config = {
+      appKey: 'omega078268b141'
+    }
+    var Omega = Omega || config
+  </script>
+
+  <script src="https://dpubstatic.udache.com/static/dpubimg/yejFX9jkDx/polyfill.min.js"></script>
+  <% if (htmlWebpackPlugin.options.Vconsole) {%>
+  <script src="https://cdn.bootcss.com/vConsole/3.3.4/vconsole.min.js"></script>
+  <script>
+    var vConsole = new VConsole();
+  </script>
+  <% } %>
+
+  <script crossorigin="anonymous" type="text/javascript" src="<%- htmlWebpackPlugin.options.Omega %>"></script>
+  <div id="app"></div>
+  <!-- built files will be auto injected -->
+</body>
+</html>

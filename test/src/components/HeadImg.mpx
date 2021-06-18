@@ -1,0 +1,27 @@
+<template>
+  <image src="{{img}}" mode="widthFix"></image>
+</template>
+<script>
+import { createComponent } from '@mpxjs/core'
+
+createComponent({
+  properties: {
+    img: {
+      type: String,
+      value: ''
+    }
+  },
+  data () {
+    return {}
+  },
+  computed: {},
+  methods: {},
+  ready () {}
+})
+</script>
+
+<script type="application/json" lang="json">
+{
+  "component": true
+}
+</script>

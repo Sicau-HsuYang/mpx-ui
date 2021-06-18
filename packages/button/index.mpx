@@ -1,0 +1,14 @@
+<template>
+    <view class="button"></view>
+</template>
+<script>
+  import { createComponent } from '@mpxjs/core'
+
+  createComponent({
+
+  })
+</script>
+
+<style lang="scss" scoped>
+    
+</style>

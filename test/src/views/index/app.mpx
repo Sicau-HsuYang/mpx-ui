@@ -1,0 +1,28 @@
+<script>
+  import mpx, { createApp } from '@mpxjs/core'
+  import apiProxy from '@mpxjs/api-proxy'
+  import fetch from '@didi/mpx-fetch'
+
+  let loginConfig = {
+    loginType: 'trinity',
+    loginJsVersion: '1.8.5',
+    productType: 'didi',
+    useOauthCode: true,
+    offline: !process.env.ONLINE
+  }
+  K.setLoginConfig(loginConfig)
+  mpx.use(apiProxy, { usePromise: true }).use(fetch)
+  createApp({})
+</script>
+
+<style>
+
+</style>
+
+<script name="json">
+module.exports = {
+  pages: [
+    './index.mpx'
+  ]
+}
+</script>

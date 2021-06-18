@@ -1,0 +1,148 @@
+<template>
+  <view>
+    <!-- 需要整块显示 -->
+    <block wx:if="{{whole}}">
+      {{ txt }}
+    </block>
+    <view wx:else> </view>
+  </view>
+</template>
+<script>
+import { createComponent } from '@mpxjs/core'
+createComponent({
+  properties: {
+    /** 需要展示的倒计时 */
+    time: {
+      type: Number,
+      value: 0
+    },
+    /** 需要展示的最大时间单位 可选值  d H m s */
+    highUnit: {
+      type: String,
+      required: false,
+      value: 'H'
+    },
+    lowUnit: {
+      type: String,
+      required: false,
+      value: 'ms'
+    },
+    /** 是否整块显示 */
+    whole: {
+      type: Boolean,
+      required: false,
+      value: true
+    },
+    separator: {
+      type: String,
+      required: false,
+      value: ':'
+    }
+  },
+  data() {
+    return {
+      timestamp: 0,
+      startIdx: 0,
+      endIdx: 0,
+      units: [
+        { unit: 'ms', pad: 0, span: 1, transform: 10 },
+        { unit: 's', pad: 2, span: 1, suffix: ':' },
+        { unit: 'm', pad: 2, span: 60, suffix: ':' },
+        { unit: 'H', pad: 2, span: 3600, suffix: ':' },
+        { unit: 'd', pad: -1, span: 24 * 3600, suffix: '天' }
+      ]
+    }
+  },
+  computed: {
+    txt() {
+      var timestamp = this.timestamp
+      var { units, results } = this.getParam()
+      for (var i = units.length - 1; i >= 0; i--) {
+        var summary = 0
+        var distance = timestamp - summary
+        typeof units[i].transform === 'number' && (distance *= units[i].transform)
+        var span = units[i].span
+        var val = Math.floor(distance / span)
+        timestamp = distance % span
+        results[i].val = val
+      }
+      var startIdx = this.units.findIndex(x => x.unit === this.lowUnit)
+      //如果以ms结尾的话，需要处理后面，最后需要以 . 分隔
+      if (startIdx === 0) {
+        results[1] && (results[1].suffix = '.')
+      } else {
+        //否则 需要去掉最后一个:
+        results[0].suffix = ''
+      }
+      return results
+        .reverse()
+        .map(x => String(x.val + '').padStart(x.pad, 0) + (x.suffix || ''))
+        .join('')
+    },
+    distance() {
+      var types = {
+        d: 24 * 3600,
+        H: 3600,
+        m: 60,
+        s: 1,
+        ms: 0.1
+      }
+      return types[this.lowUnit]
+    },
+    tick() {
+      return this.lowUnit === 'ms' ? 100 : 1000
+    }
+  },
+  lifetimes: {
+    attached() {
+      this.timestamp = this.time
+      this.loop()
+    },
+    detached() {
+      clearTimeout(this.timer)
+    }
+  },
+  methods: {
+    loop() {
+      this.timestamp -= this.distance
+      this.timer = setTimeout(() => {
+        this.loop()
+        if (this.timestamp <= 0) {
+          clearTimeout(this.timer)
+          this.timestamp = 0
+        }
+      }, this.tick)
+    },
+    getParam() {
+      var endIdx = (this.endIdx = this.units.findIndex(x => x.unit === this.highUnit))
+      var startIdx = (this.startIdx = this.units.findIndex(x => x.unit === this.lowUnit))
+      //默认H到ms
+      if (startIdx < 0) {
+        startIdx = 0
+      }
+      if (endIdx < 0) {
+        endIdx = 3
+      }
+      var leftUnit = this.units[startIdx],
+        rightUnit = this.units[endIdx]
+      var len = endIdx - startIdx + 1
+      var units = this.units.slice(startIdx, startIdx + len)
+      var results = new Array(len)
+      for (var i = 0; i < results.length; i++) {
+        results[i] = {
+          span: 0,
+          pad: units[i].pad,
+          val: 0,
+          suffix: units[i].suffix
+        }
+      }
+      return { units, results }
+    }
+  }
+})
+</script>
+<script type='application/json' lang='json'>
+{
+  "component": true
+}
+</script>
